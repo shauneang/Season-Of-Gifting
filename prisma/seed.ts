@@ -7,11 +7,11 @@ async function seed() {
     await Promise.all(
         (await getEmployees()).map(employee => {
             const {staff_pass_id, team_name, created_at} = employee
+            // const date = new Date(created_at).getTime()
             return db.employee.create({
                 data:{
                     staff_pass_id,
-                    team_name,
-                    created_at
+                    team_name
                 }
             })
         })

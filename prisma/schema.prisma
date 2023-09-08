@@ -11,12 +11,12 @@ datasource db {
 }
 
 model Employee {
-  staff_pass_id String @id
+  staff_pass_id String   @id
   team_name     String
-  created_at    String
+  created_at    DateTime @default(now())
 }
 
 model Redemption {
-  team_name   String @id
-  redeemed_at String
+  team_name   String   @id
+  redeemed_at DateTime @default(now())
 }

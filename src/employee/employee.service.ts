@@ -10,11 +10,13 @@ export const getEmployee = async (staff_pass_id:string): Promise<Employee | null
 }
 
 export const listEmployees = async (): Promise<Array<Employee>> => {
-    return db.employee.findMany({
-        select:{
-            staff_pass_id:true,
-            team_name:true,
-            created_at:true
+    return db.employee.findMany()
+}
+
+export const getEmployeeTeamName = async (staff_pass_id:string): Promise<string> => {
+        const employee = await getEmployee(staff_pass_id)
+        if (!employee) {
+            throw new Error("No employee found")
         }
-    })
+        return employee.team_name
 }

@@ -6,10 +6,10 @@ import * as EmployeeService from "./employee.service"
 export const employeeRouter = express.Router()
 
 // GET: Employee with staff_pass_id
-employeeRouter.get("/:id", async (request: Request, response: Response) => {
+employeeRouter.get("/:staff_pass_id", async (request: Request, response: Response) => {
     try{
-        if (request.params.id == undefined) throw new Error('Id is undefined')
-        const employee = await EmployeeService.getEmployee(request.params.id.toString())
+        if (request.params.staff_pass_id == undefined) throw new Error('Id is undefined')
+        const employee = await EmployeeService.getEmployee(request.params.staff_pass_id.toString())
         if(employee){
             return response.status(200).json(employee)
         }
