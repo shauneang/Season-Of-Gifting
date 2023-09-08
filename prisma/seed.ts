@@ -1,17 +1,7 @@
 import {db} from '../src/utils/db.server'
 import fs from 'fs';
 import csv from 'csv-parser';
-
-type Employee = {
-    staff_pass_id: string
-    team_name: string
-    created_at: bigint
-}
-
-type Redemption = {
-    team_name: string
-    redeemed_at: bigint
-}
+import { Employee } from '../src/types/tableTypes';
 
 async function seed() {
     await Promise.all(

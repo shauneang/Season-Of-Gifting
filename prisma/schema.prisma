@@ -13,10 +13,10 @@ datasource db {
 model Employee {
   staff_pass_id String @id
   team_name     String
-  created_at    BigInt
+  created_at    String
 }
 
 model Redemption {
   team_name   String @id
-  redeemed_at BigInt
+  redeemed_at String
 }
