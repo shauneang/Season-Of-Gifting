@@ -1,9 +1,8 @@
-import express from "express"
-import type { Request, Response} from "express"
-import {body, validationResult} from "express-validator"
-
-import * as EmployeeService from "./employee.service"
-export const employeeRouter = express.Router()
+import type { Request, Response} from "express";
+import {body, validationResult} from "express-validator";
+import * as EmployeeService from "./employee.service";
+const express = require('express');
+export const employeeRouter = express.Router();
 
 // GET: Employee with staff_pass_id
 employeeRouter.get("/:staff_pass_id", async (request: Request, response: Response) => {
