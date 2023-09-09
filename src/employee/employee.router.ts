@@ -1,7 +1,7 @@
 import type { Request, Response} from "express";
+import express from "express";
 import {body, validationResult} from "express-validator";
 import * as EmployeeService from "./employee.service";
-const express = require('express');
 export const employeeRouter = express.Router();
 
 // GET: Employee with staff_pass_id
@@ -13,7 +13,7 @@ employeeRouter.get("/:staff_pass_id", async (request: Request, response: Respons
             return response.status(200).json(employee)
         }
         else {
-            return response.status(405).json("Employee could not be found")
+            return response.status(404).json('Employee could not be found')
         }
     }
     catch(e: any) {
