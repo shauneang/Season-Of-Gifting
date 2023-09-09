@@ -20,3 +20,11 @@ export const getEmployeeTeamName = async (staff_pass_id:string): Promise<string>
         }
         return employee.team_name
 }
+
+export const getTeam = async (team_name:string): Promise<Array<Employee>> => {
+    return db.employee.findMany({
+        where:{
+            team_name
+        }
+    })
+}

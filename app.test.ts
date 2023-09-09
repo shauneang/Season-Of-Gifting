@@ -48,6 +48,27 @@ describe("Employees API", () => {
             expect(response.body).toEqual("Employee could not be found")
         })
     });
+
+    it('GET /api/employee/:team_name --> True if team_name exists', () => {
+        const existingTeam = "SLYTHERIN"
+        return request(app)
+        .get(`/api/employee/team/${existingTeam}`)
+        .expect(200)
+        .then((response:any) => {
+            expect(response.body).toEqual(true)
+        })
+    })
+
+    it('GET /api/employee/:team_name --> False if team_name does not exist', () => {
+        const nonExistingTeam = "nonExistingTeam"
+        return request(app)
+        .get(`/api/employee/team/${nonExistingTeam}`)
+        .expect(404)
+        .then((response:any) => {
+            expect(response.body).toEqual(false)
+        })
+    })
+
 });
 
 describe("Redemption API", () => {

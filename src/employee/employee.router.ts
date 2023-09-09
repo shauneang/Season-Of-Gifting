@@ -7,7 +7,6 @@ export const employeeRouter = express.Router();
 // GET: Employee with staff_pass_id
 employeeRouter.get("/:staff_pass_id", async (request: Request, response: Response) => {
     try{
-        if (request.params.staff_pass_id == undefined) throw new Error('Id is undefined')
         const employee = await EmployeeService.getEmployee(request.params.staff_pass_id.toString())
         if(employee){
             return response.status(200).json(employee)
@@ -24,9 +23,26 @@ employeeRouter.get("/:staff_pass_id", async (request: Request, response: Respons
 // GET: List all employee
 employeeRouter.get("/", async (request: Request, response: Response) => {
     try{
-        const employees = await EmployeeService.listEmployees()
+        const employee = await EmployeeService.listEmployees()
 
-        return response.status(200).json(employees)
+        return response.status(200).json(employee)
+    }
+    catch(e: any) {
+        return response.status(500).json(e.message)
+    }
+})
+
+// GET: Check if team_name exists
+employeeRouter.get("/team/:team_name", async (request: Request, response: Response) => {
+    try{
+        const employees = await EmployeeService.getTeam(request.params.team_name.toString())
+        const teamExists = employees.length > 0
+        if (teamExists) {
+            return response.status(200).json(teamExists)
+        }
+        else {
+            return response.status(404).json(teamExists)
+        }
     }
     catch(e: any) {
         return response.status(500).json(e.message)
