@@ -1,13 +1,12 @@
 import * as dotenv from "dotenv"
-import getApp from "./app"
+import makeApp from "./app"
 
 dotenv.config()
 
 if(!process.env.PORT) {
     process.exit(1)
 }
-
-const app = getApp()
+const app = makeApp()
 
 const PORT = parseInt(process.env.PORT as string, 10);
 app.listen(PORT, () => {

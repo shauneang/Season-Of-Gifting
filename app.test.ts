@@ -1,8 +1,7 @@
-import getApp from "./src/app";
-import { Http2ServerResponse } from "http2";
+import makeApp from "./src/app";
 
 const request = require('supertest');
-const app = getApp()
+const app = makeApp()
 
 describe("Employees API", () => {
     it('GET /api/employee --> List of all Employees', () => {
@@ -100,6 +99,8 @@ describe("Redemption API", () => {
         })
     });
 
+    it('GET /api/redemption/eligible/:staff_pass_id --> True if team has not redeemed', () => {})
+
     it('GET /api/redemption/eligible/:staff_pass_id --> False if team has redeemed', () => {
         const employeeId = "BOSS_CEQOWI8GNAB3"
 
@@ -112,10 +113,7 @@ describe("Redemption API", () => {
         })
     });
 
-    it('GET /api/redemption/eligible/:staff_pass_id --> True if team has not redeemed', () => {})
-
     it('POST /api/redemption/:staff_pass_id --> Redemption if staff\'s team has not redeemed', () => {})
 
     it('POST /api/redemption/:staff_pass_id --> 409 if staff\'s team has redeemed', () => {})
-
 });

@@ -11,7 +11,7 @@ export const redemptionRouter = express.Router()
 redemptionRouter.get("/:team_name", async (request: Request, response: Response) => {
     try{
         if (request.params.team_name == undefined) throw new Error('Team name is undefined')
-        const redemption = await RedemptionService.getRedemption(request.params.team_name.toString())
+        const redemption = await RedemptionService.getRedemption(request.params.team_name)
         if(redemption){
             return response.status(200).json(redemption)
         }
@@ -24,14 +24,11 @@ redemptionRouter.get("/:team_name", async (request: Request, response: Response)
     }
 })
 
-//POST: Create Redemption with staff_pass_id 
+// POST: Create Redemption with staff_pass_id 
 redemptionRouter.post("/:staff_pass_id", async (request: Request, response: Response) => {
-    const errors = validationResult(request)
-    if (!errors.isEmpty()) {
-        return response.status(400).json({errors: errors.array()})
-    }
     try{
         const team_name = await EmployeeService.getEmployeeTeamName(request.params.staff_pass_id)
+        // Check if team is null
         const newRedemption = await RedemptionService.createRedemption(team_name)
         return response.status(201).json(newRedemption)
     }
@@ -50,7 +47,6 @@ redemptionRouter.get("/eligible/:staff_pass_id", body("staff_pass_id").isString(
     try{
         const team_name = await EmployeeService.getEmployeeTeamName(request.params.staff_pass_id)
         const eligible = await RedemptionService.eligibleForRedemption(team_name)
-        // const message = eligible ? `Team ${team_name} is eligible` : `Team ${team_name} is not eligible`
         return response.status(200).json(eligible)
     }
     catch(e: any) {
