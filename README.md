@@ -106,7 +106,7 @@ Logic:
 The tests cover the possible scenarios encountered by the 3 functionalities stated above in Product Overview
 
 Unfortunately the approach I adopted does not work on a few test cases which requires the `redemption` table to not have any conflicting `team_name`s.
-I hope to continue to figure out how to use a testing database to run my tests, inject mock data and reset the data after each test.
+I hope to continue to figure out how to use a testing database to run my tests, inject mock data and reset the data after each test instead of the production databse. However, the rest of the test cases still run successfully.
 
 ### Approach 1: Mocking Prisma (Unsuccessful)
 
