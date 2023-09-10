@@ -1,5 +1,7 @@
 # Season Of Gifting
-Company gift distribution tracker using Node.js and Typescript. This is my first attempt at test-driven development and I learnt a lot of good techniques to implement such a strategy. Unfortunately, I was unable to implement it the way I wanted, which was to have a separate testing database using prisma framework where I can create dummy data to test certain cases and not affect the production database. I will continue to explore new approaches in order to achieve my goal.
+Company gift distribution tracker using Node.js and Typescript. This is my first attempt at test-driven development and I learnt a lot of good techniques to implement such a strategy. 
+
+Unfortunately, I was unable to implement it the way I wanted, which was to have a separate testing database using prisma framework where I can create dummy data to test certain cases and not affect the production database. I will continue to explore new approaches in order to achieve my goal.
 
 Frameworks: 
 
