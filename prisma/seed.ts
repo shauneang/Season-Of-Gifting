@@ -1,7 +1,9 @@
-import {db} from '../src/utils/db.server'
+import prisma from '../src/utils/client'
+// import prismaMock from '../src/utils/mockClient'
 import fs from 'fs';
 import csv from 'csv-parser';
-import { Employee } from '../src/types/tableTypes';
+import { PrismaClient } from '@prisma/client';
+import { prismaMock } from '../src/utils/__mocks__/mockClient';
 
 type csvRow = {
     staff_pass_id: string
@@ -9,7 +11,7 @@ type csvRow = {
     created_at: string
 }
 
-async function seed() {
+export default async function seed(db: PrismaClient) {
     await Promise.all(
         (await getEmployees()).map(employee => {
             let {staff_pass_id, team_name, created_at} = employee
@@ -42,4 +44,4 @@ async function getEmployees(): Promise<Array<csvRow>> {
     return readCSVFile('csv-team-mapping-long.csv')
 }
 
-seed()
+seed(prisma)
