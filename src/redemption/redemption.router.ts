@@ -30,7 +30,6 @@ export default function makeRedemptionRouter(db: PrismaClient) {
     redemptionRouter.post("/:staff_pass_id", async (request: Request, response: Response) => {
         try{
             const team_name = await EmployeeService.getEmployeeTeamName(request.params.staff_pass_id, db)
-            // Check if team is null
             const newRedemption = await RedemptionService.createRedemption(team_name, db)
             return response.status(201).json(newRedemption)
         }
@@ -45,7 +44,7 @@ export default function makeRedemptionRouter(db: PrismaClient) {
     })
 
     //GET: Check Redemption with staff_pass_id 
-    redemptionRouter.get("/eligible/:staff_pass_id", body("staff_pass_id").isString(), async (request: Request, response: Response) => {
+    redemptionRouter.get("/eligible/:staff_pass_id", async (request: Request, response: Response) => {
         try{
             const team_name = await EmployeeService.getEmployeeTeamName(request.params.staff_pass_id, db)
             const eligible = await RedemptionService.eligibleForRedemption(team_name, db)
