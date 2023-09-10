@@ -1,5 +1,7 @@
 # Season Of Gifting
-Company gift distribution tracker using Node.js and Typescript. This is my first attempt at test-driven development and I learnt a lot of good techniques to implement such a strategy. 
+Company gift distribution tracker using Node.js and Typescript. Company staff attempt to collect christmas gifts for their whole team and are only eligible if their team has yet to collect.
+
+This is my first attempt at test-driven development and I learnt a lot of good techniques to implement such a strategy. 
 
 Unfortunately, I was unable to implement it the way I wanted, which was to have a separate testing database using prisma framework where I can inject dummy data for each test case, reset it after and not affect the production database. I will continue to explore new approaches in order to achieve my goal.
 
@@ -39,14 +41,40 @@ This project has 3 main functionalities:
 2. Check if an employee's team is eligible with `staff_pass_id`
 3. Create a new `redemption` object with `staff_pass_id`
 
-PORT: `8000`
+### Database Models
+
+#### Employee
+Table containing all employees in the company
+
+Employee Model:
+```
+model Employee {
+  staff_pass_id String   @id
+  team_name     String
+  created_at    DateTime @default(now())
+}
+```
+
+#### Redemption
+
+Table containing all past redemptions from teams in the company
+
+Redemption Model:
+```
+model Redemption {
+  team_name   String   @id
+  redeemed_at DateTime @default(now())
+}
+```
 
 <br> 
 
+### Endpoints 
+PORT: `8000`
 
 #### 1. GET: Retrieve employee details
 
-Endpoint route: `http://localhost:8000/api/employee/:staff_pass_id`
+Endpoint route: `/api/employee/:staff_pass_id`
 
 Expected input: `staff_pass_id` in params
 
@@ -66,7 +94,7 @@ Expected return: `employee` object
 
 #### 2. GET: Check eligibility with staff_pass_id
 
-Endpoint route: `http://localhost:8000/api/redemption/eligible/:staff_pass_id`
+Endpoint route: `/api/redemption/eligible/:staff_pass_id`
 
 Expected input: `staff_pass_id` in params
 
@@ -82,7 +110,7 @@ Logic:
 
 #### 3. POST: Create new redemption
 
-Endpoint route: `http://localhost:8000/api/redemption/:staff_pass_id`
+Endpoint route: `/api/redemption/:staff_pass_id`
 
 Expected input: `staff_pass_id` in params
 
